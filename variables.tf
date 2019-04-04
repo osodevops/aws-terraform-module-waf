@@ -54,7 +54,7 @@ variable "waf_badbot_error_threshold" {
 }
 
 variable "waf_badbot_request_threshold" {
-  default = "800"
+  default = "2000"
 }
 
 variable "waf_block_period" {
@@ -69,7 +69,7 @@ variable "waf_whitelisted_ip_sets" {
 ### Conditions ###
 
 locals {
-  is_sql_iInjectionProtectionActivated           = "${var.sql_injection_protection_param == "yes" ? 1 : 0}"
+  is_sql_injection_protection_activated           = "${var.sql_injection_protection_param == "yes" ? 1 : 0}"
   is_cross_site_scripting_protection_activated  = "${var.cross_site_scripting_protection_param == "yes" ? 1 : 0}"
   is_http_flood_protection_activated            = "${var.activate_http_flood_protection_param == "yes" ? 1 : 0}"
   is_scans_probes_protection_activated          = "${var.activate_scans_probes_protection_param == "yes" ? 1 : 0}"

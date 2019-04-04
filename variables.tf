@@ -69,7 +69,7 @@ variable "waf_whitelisted_ip_sets" {
 ### Conditions ###
 
 locals {
-  is_sq_iInjectionProtectionActivated           = "${var.sql_injection_protection_param == "yes" ? 1 : 0}"
+  is_sql_iInjectionProtectionActivated           = "${var.sql_injection_protection_param == "yes" ? 1 : 0}"
   is_cross_site_scripting_protection_activated  = "${var.cross_site_scripting_protection_param == "yes" ? 1 : 0}"
   is_http_flood_protection_activated            = "${var.activate_http_flood_protection_param == "yes" ? 1 : 0}"
   is_scans_probes_protection_activated          = "${var.activate_scans_probes_protection_param == "yes" ? 1 : 0}"

@@ -9,7 +9,7 @@ resource "aws_lambda_function" "SolutionHelper" {
   timeout = "300"
 
 
-  s3_bucket = "${join("-", list("solutions", data.aws_region))}"
+  s3_bucket = "${join("-", list("solutions", data.aws_region.current.name))}"
   s3_key    = "library/solution-helper/v1/solution-helper.zip"
 
   tags = "${merge(var.common_tags,

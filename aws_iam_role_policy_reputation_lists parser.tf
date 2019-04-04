@@ -14,7 +14,7 @@ resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_cloudwatch_l
               "logs:CreateLogStream",
               "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:${data.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
+            "Resource": "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
         }
     ]
 }
@@ -56,8 +56,8 @@ resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_waf_get_and_
               "waf-regional:UpdateIPSet"
             ],
             "Resource": [
-              "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_reputation_lists_set1.id}",
-              "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_reputation_lists_set2.id}"
+              "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_reputation_lists_set1.id}",
+              "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_reputation_lists_set2.id}"
             ]
         }
     ]

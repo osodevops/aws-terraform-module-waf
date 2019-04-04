@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_access" {
                 "waf-regional:GetWebACL",
                 "waf-regional:UpdateWebACL"
               ],
-            "Resource": "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:webacl/${aws_wafregional_web_acl.waf_web_acl.id}"
+            "Resource": "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:webacl/${aws_wafregional_web_acl.waf_web_acl.id}"
         }
     ]
 }
@@ -81,7 +81,7 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rule_access" {
                 "waf-regional:UpdateIPSet",
                 "waf-regional:UpdateWebACL"
               ],
-            "Resource": "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:rule/*"
+            "Resource": "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/*"
         }
     ]
 }
@@ -121,7 +121,7 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_logs_access" {
               "logs:CreateLogStream",
               "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:${data.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
+            "Resource": "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
         }
     ]
 }
@@ -142,7 +142,7 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_ip_set_access" {
                 "waf-regional:GetIPSet",
                 "waf-regional:UpdateIPSet"
               ],
-            "Resource": "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}::ipset/*"
+            "Resource": "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}::ipset/*"
         }
     ]
 }
@@ -166,7 +166,7 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rate_based_rule_
                 "waf-regional:ListRateBasedRules",
                 "waf-regional:UpdateWebACL"
               ],
-            "Resource": "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ratebasedrule/*"
+            "Resource": "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ratebasedrule/*"
         }
     ]
 }

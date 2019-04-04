@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_waf_custom_resource_function" {
   timeout       = "300"
 
 
-  s3_bucket = "${join("-", list("solutions", data.aws_region))}"
+  s3_bucket = "${join("-", list("solutions", data.aws_region.current.name))}"
   s3_key    = "aws-waf-security-automations/v4/custom-resource.zip"
 
   tags = "${merge(var.common_tags,

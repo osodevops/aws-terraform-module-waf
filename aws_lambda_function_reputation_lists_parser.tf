@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_waf_reputation_lists_parser_function" {
   memory_size   = "128"
   timeout       = "300"
 
-  s3_bucket     = "${join("-", list("solutions", data.aws_region))}"
+  s3_bucket     = "${join("-", list("solutions", data.aws_region.current.name))}"
   s3_key        = "aws-waf-security-automations/v3/reputation-lists-parser.zip"
 
   environment {

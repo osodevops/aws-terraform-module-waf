@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_waf_badbot_parser_function" {
   memory_size   = "128"
   timeout       = "300"
 
-  s3_bucket = "${join("-", list("solutions", data.aws_region))}"
+  s3_bucket = "${join("-", list("solutions", data.aws_region.current.name))}"
   s3_key        = "aws-waf-security-automations/v2/access-handler.zip"
 
   environment {
@@ -24,7 +24,7 @@ resource "aws_lambda_function" "lambda_waf_badbot_parser_function" {
       waf_badbot_request_threshold                       = "${var.waf_badbot_request_threshold}"
       waf_block_period                         = "${var.waf_block_period}"
       IP_SET_ID_BAD_BOT                           = "${aws_wafregional_ipset.waf_badbot_set.id}"
-      REGION                                = "${data.aws_region}"
+      REGION                                = "${data.aws_region.current.name}"
       SEND_ANONYMOUS_USAGE_DATA                 = "${var.send_anonymous_usage_data_to_aws}"
       UUID                                   = "${random_string.UniqueID.result}"
       LOG_TYPE                  = "alb"

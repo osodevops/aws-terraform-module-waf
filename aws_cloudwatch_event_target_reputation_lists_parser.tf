@@ -19,7 +19,7 @@ resource "aws_cloudwatch_event_target" "lambda_waf_reputation_lists_parser_event
     }
   ],
   "logType": "alb",
-  "region": "${data.aws_region}",
+  "region": "${data.aws_region.current.name}",
   "ipSetIds": [
     "${aws_wafregional_ipset.waf_reputation_lists_set1.id}",
     "${aws_wafregional_ipset.waf_reputation_lists_set2.id}"

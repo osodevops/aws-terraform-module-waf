@@ -75,9 +75,9 @@ resource "aws_iam_role_policy" "lambda_role_log_parser_waf_get_and_update_ip_set
                 "waf-regional:UpdateIPSet"
             ],
             "Resource": [
-              "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_blacklist_set.id}",
-              "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_scans_probes_set.id}",
-              "arn:aws:waf-regional:${data.aws_region}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_http_flood_set.id}"
+              "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_blacklist_set.id}",
+              "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_scans_probes_set.id}",
+              "arn:aws:waf-regional:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:ipset/${aws_wafregional_ipset.waf_http_flood_set.id}"
             ]
         }
     ]
@@ -101,7 +101,7 @@ resource "aws_iam_role_policy" "lambda_role_log_parser_logs_access" {
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:${data.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
+            "Resource": "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
         }
     ]
 }

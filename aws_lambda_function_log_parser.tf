@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_waf_log_parser_function" {
   memory_size = "512"
   timeout     = "300"
 
-  s3_bucket     = "${join("-", list("solutions", data.aws_region))}"
+  s3_bucket     = "${join("-", list("solutions", data.aws_region.current.name))}"
   s3_key        = "aws-waf-security-automations/v2/log-parser.zip"
 
   environment {
@@ -24,7 +24,7 @@ resource "aws_lambda_function" "lambda_waf_log_parser_function" {
       UUID                                           = "${random_string.UniqueID.result}"
       LIMIT_IP_ADDRESS_RANGES_PER_IP_MATCH_CONDITION = "10000"
       MAX_AGE_TO_UPDATE                              = "30"
-      REGION                                         = "${data.aws_region}"
+      REGION                                         = "${data.aws_region.current.name}"
       LOG_TYPE                                       = "alb"
     }
   }

@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda_waf_badbot_parser_function" {
-  count         = "${local.BadBotProtectionActivated}"
+  count         = "${local.is_badbot_protection_activated}"
   depends_on    = ["aws_iam_role.lambda_badbot_role"]
   function_name = "${var.account_name}-lambda_waf_badbot_parser_function"
   description   = "This lambda function will intercepts and inspects trap endpoint requests to extract its IP address, and then add it to an AWS WAF block list."
@@ -14,18 +14,18 @@ resource "aws_lambda_function" "lambda_waf_badbot_parser_function" {
 
   environment {
     variables = {
-      ActivateBadBotProtectionParam          = "${var.ActivateBadBotProtectionParam}"
-      ActivateHttpFloodProtectionParam       = "${var.ActivateHttpFloodProtectionParam}"
-      ActivateReputationListsProtectionParam = "${var.ActivateReputationListsProtectionParam}"
-      ActivateScansProbesProtectionParam     = "${var.ActivateScansProbesProtectionParam}"
-      CrossSiteScriptingProtectionParam      = "${var.CrossSiteScriptingProtectionParam}"
-      SqlInjectionProtectionParam            = "${var.SqlInjectionProtectionParam}"
-      ErrorThreshold                         = "${var.ErrorThreshold}"
-      RequestThreshold                       = "${var.RequestThreshold}"
-      WAFBlockPeriod                         = "${var.WAFBlockPeriod}"
+      activate_badbot_protection_param          = "${var.activate_badbot_protection_param}"
+      activate_http_flood_protection_param       = "${var.activate_http_flood_protection_param}"
+      activate_reputation_lists_protection_param = "${var.activate_reputation_lists_protection_param}"
+      activate_scans_probes_protection_param     = "${var.activate_scans_probes_protection_param}"
+      cross_site_scripting_protection_param      = "${var.cross_site_scripting_protection_param}"
+      sql_injection_protection_param            = "${var.sql_injection_protection_param}"
+      waf_badbot_error_threshold                         = "${var.waf_badbot_error_threshold}"
+      waf_badbot_request_threshold                       = "${var.waf_badbot_request_threshold}"
+      waf_block_period                         = "${var.waf_block_period}"
       IP_SET_ID_BAD_BOT                           = "${aws_wafregional_ipset.waf_badbot_set.id}"
       REGION                                = "${data.aws_region}"
-      SEND_ANONYMOUS_USAGE_DATA                 = "${var.SendAnonymousUsageData}"
+      SEND_ANONYMOUS_USAGE_DATA                 = "${var.send_anonymous_usage_data_to_aws}"
       UUID                                   = "${random_string.UniqueID.result}"
       LOG_TYPE                  = "alb"
     }

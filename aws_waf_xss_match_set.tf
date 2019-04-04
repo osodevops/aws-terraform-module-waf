@@ -1,5 +1,5 @@
 resource "aws_wafregional_xss_match_set" "waf_xss_dectection" {
-  count = "${local.CrossSiteScriptingProtectionActivated}"
+  count = "${local.is_cross_site_scripting_protection_activated}"
   name = "${upper(var.environment)}-XSS-DETECTION"
 
   xss_match_tuple {

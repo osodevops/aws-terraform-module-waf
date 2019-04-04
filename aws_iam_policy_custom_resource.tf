@@ -24,7 +24,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_lambda_access" {
-  count = "${local.ReputationListsProtectionActivated}"
+  count = "${local.is_reputation_lists_protection_activated}"
   name = "${var.account_name}-lambda_role_custom_resourceLambdaAccess"
   role = "${aws_iam_role.lambda_custom_resource_role.id}"
 

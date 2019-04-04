@@ -1,5 +1,5 @@
 resource "aws_wafregional_sql_injection_match_set" "waf_sql_injection_detection" {
-  count = "${local.SqlInjectionProtectionActivated}"
+  count = "${local.is_sql_injection_protection_activated}"
   name  = "${upper(var.environment)}-WAF-SQL-INJECTION-DETECTION"
 
   sql_injection_match_tuple {

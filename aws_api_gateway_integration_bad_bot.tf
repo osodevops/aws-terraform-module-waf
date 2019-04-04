@@ -1,5 +1,5 @@
 resource "aws_api_gateway_integration" "api_gateway_badbot_method_root_integration" {
-  count                   = "${local.BadBotProtectionActivated}"
+  count                   = "${local.is_badbot_protection_activated}"
   depends_on              = ["aws_api_gateway_rest_api.api_gateway_badbot","aws_api_gateway_method.api_gateway_badbot_method", "aws_lambda_function.lambda_waf_badbot_parser_function"]
   rest_api_id             = "${aws_api_gateway_rest_api.api_gateway_badbot.id}"
   resource_id             = "${aws_api_gateway_rest_api.api_gateway_badbot.root_resource_id}"
@@ -10,7 +10,7 @@ resource "aws_api_gateway_integration" "api_gateway_badbot_method_root_integrati
 }
 
 resource "aws_api_gateway_integration" "api_gateway_badbot_method_integration" {
-  count                   = "${local.BadBotProtectionActivated}"
+  count                   = "${local.is_badbot_protection_activated}"
   depends_on              = ["aws_api_gateway_rest_api.api_gateway_badbot", "aws_api_gateway_resource.api_gateway_badbot_resource", "aws_api_gateway_method.api_gateway_badbot_method", "aws_lambda_function.lambda_waf_badbot_parser_function"]
   rest_api_id             = "${aws_api_gateway_rest_api.api_gateway_badbot.id}"
   resource_id             = "${aws_api_gateway_resource.api_gateway_badbot_resource.id}"

@@ -1,5 +1,5 @@
 resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_cloudwatch_logs" {
-  count = "${local.ReputationListsProtectionActivated}"
+  count = "${local.is_reputation_lists_protection_activated}"
   name = "${var.account_name}-LambdaRoleReputationListsParserCloudWatchLogs"
   role = "${aws_iam_role.lambda_role_reputation_lists_parser.id}"
 
@@ -22,7 +22,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_waf_get_change_token" {
-  count = "${local.ReputationListsProtectionActivated}"
+  count = "${local.is_reputation_lists_protection_activated}"
   name = "${var.account_name}-LambdaRoleReputationListsParserWAFGetChangeToken"
   role = "${aws_iam_role.lambda_role_reputation_lists_parser.id}"
 
@@ -41,7 +41,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_waf_get_and_update_ip_set" {
-  count = "${local.ReputationListsProtectionActivated}"
+  count = "${local.is_reputation_lists_protection_activated}"
   name = "${var.account_name}-LambdaRoleReputationListsParserWAFGetAndUpdateIPSet"
   role = "${aws_iam_role.lambda_role_reputation_lists_parser.id}"
 
@@ -66,7 +66,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_reputation_lists_parser_cloudwatch_access" {
-  count = "${local.ReputationListsProtectionActivated}"
+  count = "${local.is_reputation_lists_protection_activated}"
   name = "${var.account_name}-LambdaRoleReputationListsParserCloudWatchAccess"
   role = "${aws_iam_role.lambda_role_reputation_lists_parser.id}"
 

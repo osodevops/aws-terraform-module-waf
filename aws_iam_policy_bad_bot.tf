@@ -1,5 +1,5 @@
 resource "aws_iam_role_policy" "lambda_role_badbot_waf_get_change_token" {
-  count = "${local.BadBotProtectionActivated}"
+  count = "${local.is_badbot_protection_activated}"
   name = "${upper(var.environment)}-lambda-badbot-waf-get-change-token-role"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
@@ -18,7 +18,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_badbot_waf_get_and_update_ip_set" {
-  count = "${local.BadBotProtectionActivated}"
+  count = "${local.is_badbot_protection_activated}"
   name = "${upper(var.environment)}-lambda_role_badbot_waf_get_and_update_ip_set"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
@@ -40,7 +40,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_badbot_role_logs_access" {
-  count = "${local.BadBotProtectionActivated}"
+  count = "${local.is_badbot_protection_activated}"
   name = "${upper(var.environment)}-lambda_badbot_roleLogsAccess"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
@@ -63,7 +63,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_badbot_role_cloudwatch_access" {
-  count = "${local.BadBotProtectionActivated}"
+  count = "${local.is_badbot_protection_activated}"
   name = "${upper(var.environment)}-lambda_badbot_roleCloudWatchAccess"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 

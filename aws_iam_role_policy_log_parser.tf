@@ -1,5 +1,5 @@
 resource "aws_iam_role_policy" "lambda_role_log_parser_s3_access" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-LAMBDA-LOG-PARSER-S3-ACCESS-POLICY"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 
@@ -20,7 +20,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_log_parser_s3_access_put" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-LAMBDA-LOG-PARSER-S3-ACCESS-PUT-POLICY"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 
@@ -41,7 +41,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_log_parser_waf_get_change_token" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-lambda_role_log_parserWAFGetChangeToken"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 
@@ -60,7 +60,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_log_parser_waf_get_and_update_ip_set" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-lambda_role_log_parserWAFGetAndUpdateIPSet"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 
@@ -86,7 +86,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_log_parser_logs_access" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-lambda_role_log_parserLogsAccess"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 
@@ -109,7 +109,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "lambda_role_log_parser_cloudwatch_access" {
-  count = "${local.LogParserActivated}"
+  count = "${local.is_log_parser_activated}"
   name = "${upper(var.environment)}-lambda_role_log_parserCloudWatchAccess"
   role = "${aws_iam_role.lambda_log_parser_role.id}"
 

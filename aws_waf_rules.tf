@@ -28,7 +28,7 @@ resource "aws_wafregional_rate_based_rule" "waf_http_flood_rule" {
   metric_name = "SecurityAutomationsHttpFloodRule"
 
   rate_key   = "IP"
-  rate_limit = "${var.RequestThreshold}"
+  rate_limit = "${var.waf_badbot_request_threshold}"
 
   predicate {
     data_id = "${aws_wafregional_ipset.waf_http_flood_set.id}"
@@ -38,7 +38,7 @@ resource "aws_wafregional_rate_based_rule" "waf_http_flood_rule" {
 }
 
 resource "aws_wafregional_rule" "waf_scans_probes_rule" {
-  count       = "${local.LogParserActivated}"
+  count       = "${local.is_log_parser_activated}"
   depends_on  = ["aws_wafregional_ipset.waf_scans_probes_set"]
   name        = "${upper(var.environment)}-WAF-SCANS-PROBES-RULE"
   metric_name = "SecurityAutomationsScansProbesRule"
@@ -51,7 +51,7 @@ resource "aws_wafregional_rule" "waf_scans_probes_rule" {
 }
 
 resource "aws_wafregional_rule" "waf_ip_reputation_lists_rule1" {
-  count       = "${local.ReputationListsProtectionActivated}"
+  count       = "${local.is_reputation_lists_protection_activated}"
   depends_on  = ["aws_wafregional_ipset.waf_reputation_lists_set1"]
   name        = "${upper(var.environment)}-WAF-IP-REPUTATION-LISTS-RULE1"
   metric_name = "SecurityAutomationsIPReputationListsRule1"
@@ -64,7 +64,7 @@ resource "aws_wafregional_rule" "waf_ip_reputation_lists_rule1" {
 }
 
 resource "aws_wafregional_rule" "waf_ip_reputation_lists_rule2" {
-  count       = "${local.ReputationListsProtectionActivated}"
+  count       = "${local.is_reputation_lists_protection_activated}"
   depends_on  = ["aws_wafregional_ipset.waf_reputation_lists_set2"]
   name        = "${upper(var.environment)}-WAF-IP-REPUTATION-LISTS-RULE2"
   metric_name = "SecurityAutomationsIPReputationListsRule2"
@@ -77,7 +77,7 @@ resource "aws_wafregional_rule" "waf_ip_reputation_lists_rule2" {
 }
 
 resource "aws_wafregional_rule" "waf_badbod_rule" {
-  count       = "${local.BadBotProtectionActivated}"
+  count       = "${local.is_badbot_protection_activated}"
   depends_on  = ["aws_wafregional_ipset.waf_badbot_set"]
   name        = "${upper(var.environment)}-WAF-BADBOT-RULE"
   metric_name = "SecurityAutomationsBadBotRule"
@@ -90,7 +90,7 @@ resource "aws_wafregional_rule" "waf_badbod_rule" {
 }
 
 resource "aws_wafregional_rule" "waf_sql_injection_rule" {
-  count       = "${local.SqlInjectionProtectionActivated}"
+  count       = "${local.is_sql_injection_protection_activated}"
   depends_on  = ["aws_wafregional_sql_injection_match_set.waf_sql_injection_detection"]
   name        = "${upper(var.environment)}-WAF-SQL-INJECTION-RULE"
   metric_name = "SecurityAutomationsSqlInjectionRule"
@@ -103,7 +103,7 @@ resource "aws_wafregional_rule" "waf_sql_injection_rule" {
 }
 
 resource "aws_wafregional_rule" "waf_xss_rule" {
-  count       = "${local.CrossSiteScriptingProtectionActivated}"
+  count       = "${local.is_cross_site_scripting_protection_activated}"
   depends_on  = ["aws_wafregional_xss_match_set.waf_xss_dectection"]
   name        = "${upper(var.environment)}-WAF-XSS-RULE"
   metric_name = "SecurityAutomationsXssRule"

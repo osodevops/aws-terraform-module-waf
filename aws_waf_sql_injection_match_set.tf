@@ -1,6 +1,6 @@
 resource "aws_wafregional_sql_injection_match_set" "waf_sql_injection_detection" {
   count = "${local.SqlInjectionProtectionActivated}"
-  name  = "${upper(var.common_tags["Environment"])}-WAF-SQL-INJECTION-DETECTION"
+  name  = "${upper(var.environment)}-WAF-SQL-INJECTION-DETECTION"
 
   sql_injection_match_tuple {
     text_transformation = "URL_DECODE"

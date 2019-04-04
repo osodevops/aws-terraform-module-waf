@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_badbot_role" {
   count = "${local.BadBotProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-LAMBDA-BADBOT-ROLE"
+  name = "${upper(var.environment)}-LAMBDA-BADBOT-ROLE"
 
   assume_role_policy = <<EOF
 {

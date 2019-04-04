@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "lambda_role_badbot_waf_get_change_token" {
   count = "${local.BadBotProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-lambda-badbot-waf-get-change-token-role"
+  name = "${upper(var.environment)}-lambda-badbot-waf-get-change-token-role"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
   policy = <<EOF
@@ -19,7 +19,7 @@ EOF
 
 resource "aws_iam_role_policy" "lambda_role_badbot_waf_get_and_update_ip_set" {
   count = "${local.BadBotProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-lambda_role_badbot_waf_get_and_update_ip_set"
+  name = "${upper(var.environment)}-lambda_role_badbot_waf_get_and_update_ip_set"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
   policy = <<EOF
@@ -41,7 +41,7 @@ EOF
 
 resource "aws_iam_role_policy" "lambda_badbot_role_logs_access" {
   count = "${local.BadBotProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-lambda_badbot_roleLogsAccess"
+  name = "${upper(var.environment)}-lambda_badbot_roleLogsAccess"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
   policy = <<EOF
@@ -64,7 +64,7 @@ EOF
 
 resource "aws_iam_role_policy" "lambda_badbot_role_cloudwatch_access" {
   count = "${local.BadBotProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-lambda_badbot_roleCloudWatchAccess"
+  name = "${upper(var.environment)}-lambda_badbot_roleCloudWatchAccess"
   role = "${aws_iam_role.lambda_badbot_role.id}"
 
   policy = <<EOF

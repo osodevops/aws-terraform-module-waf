@@ -1,6 +1,6 @@
 resource "aws_wafregional_xss_match_set" "waf_xss_dectection" {
   count = "${local.CrossSiteScriptingProtectionActivated}"
-  name = "${upper(var.common_tags["Environment"])}-XSS-DETECTION"
+  name = "${upper(var.environment)}-XSS-DETECTION"
 
   xss_match_tuple {
     field_to_match {

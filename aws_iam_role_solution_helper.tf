@@ -1,5 +1,5 @@
 resource "aws_iam_role" "solution_helper_role" {
-  name = "${upper(var.common_tags["Environment"])}-SOLUTION-HELPER-ROLE"
+  name = "${upper(var.environment)}-SOLUTION-HELPER-ROLE"
 
   assume_role_policy = <<EOF
 {

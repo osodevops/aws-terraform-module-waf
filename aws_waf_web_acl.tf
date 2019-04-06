@@ -59,16 +59,16 @@ resource "aws_wafregional_web_acl" "waf_web_acl" {
     rule_id  = "${aws_wafregional_rule.waf_ip_reputation_lists_rule2.id}"
   }
 
-  /* disabled together with API Gateway
+  /* disabled together with API Gateway*/
   rule {
     action {
       type = "BLOCK"
     }
 
     priority = 406
-    rule_id  = "${aws_wafregional_rule.WAFBadBotRule.id}"
+    rule_id  = "${aws_wafregional_rule.waf_badbod_rule.id}"
   }
-*/
+
 
   rule {
     action {

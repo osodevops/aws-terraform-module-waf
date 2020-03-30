@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_role_reputation_lists_parser" {
-  count = "${local.is_reputation_lists_protection_activated}"
-  name = "${upper(var.environment)}-LAMBDA-REPUTATION-LISTS-ROLE"
+  count = local.is_reputation_lists_protection_activated
+  name  = "${upper(var.environment)}-LAMBDA-REPUTATION-LISTS-ROLE"
 
   assume_role_policy = <<EOF
 {
@@ -18,4 +18,6 @@ resource "aws_iam_role" "lambda_role_reputation_lists_parser" {
   ]
 }
 EOF
+
 }
+

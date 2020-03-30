@@ -1,6 +1,6 @@
 resource "aws_wafregional_xss_match_set" "waf_xss_dectection" {
-  count = "${local.is_cross_site_scripting_protection_activated}"
-  name = "${upper(var.environment)}-XSS-DETECTION"
+  count = local.is_cross_site_scripting_protection_activated
+  name  = "${upper(var.environment)}-XSS-DETECTION"
 
   xss_match_tuple {
     field_to_match {
@@ -68,3 +68,4 @@ resource "aws_wafregional_xss_match_set" "waf_xss_dectection" {
     text_transformation = "HTML_ENTITY_DECODE"
   }
 }
+

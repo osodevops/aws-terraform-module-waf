@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_log_parser_role" {
-  count = "${local.is_log_parser_activated}"
-  name = "${upper(var.environment)}-LAMBDA-LOG-PARSER-ROLE"
+  count = local.is_log_parser_activated
+  name  = "${upper(var.environment)}-LAMBDA-LOG-PARSER-ROLE"
 
   assume_role_policy = <<EOF
 {
@@ -18,4 +18,6 @@ resource "aws_iam_role" "lambda_log_parser_role" {
   ]
 }
 EOF
+
 }
+

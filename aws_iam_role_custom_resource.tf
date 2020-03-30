@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_custom_resource_role" {
-  depends_on = ["aws_wafregional_web_acl.waf_web_acl"]
-  name = "${upper(var.environment)}-LAMBDA-CUSTOM-RESOURCE-ROLE"
+  depends_on = [aws_wafregional_web_acl.waf_web_acl]
+  name       = "${upper(var.environment)}-LAMBDA-CUSTOM-RESOURCE-ROLE"
 
   assume_role_policy = <<EOF
 {
@@ -18,4 +18,6 @@ resource "aws_iam_role" "lambda_custom_resource_role" {
   ]
 }
 EOF
+
 }
+

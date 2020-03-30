@@ -17,4 +17,6 @@ resource "aws_iam_role" "solution_helper_role" {
   ]
 }
 EOF
+
 }
+

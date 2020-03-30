@@ -1,10 +1,9 @@
 resource "aws_cloudwatch_event_target" "lambda_waf_reputation_lists_parser_events_rule_target" {
-  depends_on = [
-    "aws_cloudwatch_event_rule.lambda_waf_reputation_lists_parser_events_rule"]
-  rule = "${aws_cloudwatch_event_rule.lambda_waf_reputation_lists_parser_events_rule.name}"
-  target_id = "${aws_lambda_function.lambda_waf_reputation_lists_parser_function.id}"
-  arn = "${aws_lambda_function.lambda_waf_reputation_lists_parser_function.arn}"
-  input = <<EOF
+  depends_on = [aws_cloudwatch_event_rule.lambda_waf_reputation_lists_parser_events_rule]
+  rule       = aws_cloudwatch_event_rule.lambda_waf_reputation_lists_parser_events_rule[0].name
+  target_id  = aws_lambda_function.lambda_waf_reputation_lists_parser_function[0].id
+  arn        = aws_lambda_function.lambda_waf_reputation_lists_parser_function[0].arn
+  input      = <<EOF
 {
   "lists": [
     {
@@ -21,9 +20,11 @@ resource "aws_cloudwatch_event_target" "lambda_waf_reputation_lists_parser_event
   "logType": "alb",
   "region": "${data.aws_region.current.name}",
   "ipSetIds": [
-    "${aws_wafregional_ipset.waf_reputation_lists_set1.id}",
-    "${aws_wafregional_ipset.waf_reputation_lists_set2.id}"
+    "${aws_wafregional_ipset.waf_reputation_lists_set1[0].id}",
+    "${aws_wafregional_ipset.waf_reputation_lists_set2[0].id}"
   ]
 }
 EOF
+
 }
+

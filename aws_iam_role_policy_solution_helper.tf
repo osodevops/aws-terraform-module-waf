@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "solution_helper_roleSolution_Helper_Permissions" {
   name = "${var.account_name}-solution_helper_roleSolution_Helper_Permissions"
-  role = "${aws_iam_role.solution_helper_role.id}"
+  role = aws_iam_role.solution_helper_role.id
 
   policy = <<EOF
 {
@@ -34,4 +34,6 @@ resource "aws_iam_role_policy" "solution_helper_roleSolution_Helper_Permissions"
   ]
 }
 EOF
+
 }
+

@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "lambda_role_custom_resource_s3_access" {
   name = "${var.account_name}-lambda_role_custom_resourceS3Access"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -21,12 +21,13 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_s3_access" {
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_lambda_access" {
-  count = "${local.is_reputation_lists_protection_activated}"
-  name = "${var.account_name}-lambda_role_custom_resourceLambdaAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  count = local.is_reputation_lists_protection_activated
+  name  = "${var.account_name}-lambda_role_custom_resourceLambdaAccess"
+  role  = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -35,16 +36,17 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_lambda_access" {
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "${aws_lambda_function.lambda_waf_reputation_lists_parser_function.arn}"
+            "Resource": "${aws_lambda_function.lambda_waf_reputation_lists_parser_function[0].arn}"
         }
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_access" {
   name = "${var.account_name}-lambda_role_custom_resourceWAFAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -61,13 +63,12 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_access" {
     ]
 }
 EOF
+
 }
-
-
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rule_access" {
   name = "${var.account_name}-lambda_role_custom_resourceWAFRuleAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -86,11 +87,12 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rule_access" {
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_get_change_token" {
   name = "${var.account_name}-lambda_role_custom_resourceWAFGetChangeToken"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -104,11 +106,12 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_get_change_token
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_logs_access" {
   name = "${var.account_name}-lambda_role_custom_resourceLogsAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -126,11 +129,12 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_logs_access" {
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_ip_set_access" {
   name = "${var.account_name}-LambdaRoleCustomResource-WAFIPSetAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -147,11 +151,12 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_ip_set_access" {
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rate_based_rule_access" {
   name = "${var.account_name}-LambdaRoleCustomResource-WAFRateBasedRuleAccess"
-  role = "${aws_iam_role.lambda_custom_resource_role.id}"
+  role = aws_iam_role.lambda_custom_resource_role.id
 
   policy = <<EOF
 {
@@ -171,4 +176,6 @@ resource "aws_iam_role_policy" "lambda_role_custom_resource_waf_rate_based_rule_
     ]
 }
 EOF
+
 }
+
